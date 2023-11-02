@@ -16,7 +16,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           reaction-token: ${{ secrets.GITHUB_TOKEN }}
-          issue-type: pull-requests
+          issue-type: pull-request
           commands: approve-test-run
           permission: write
 
