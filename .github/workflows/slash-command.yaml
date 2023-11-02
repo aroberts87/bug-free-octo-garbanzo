@@ -1,0 +1,22 @@
+name: test slash command
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  approve-test-run:
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    if: ${{ github.event.issue.pull_request }}
+    steps:
+      - name: Slash Command Dispatch
+        uses: peter-evans/slash-command-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          reaction-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-type: pull-requests
+          commands: approve-test-run
+          permission: write
+

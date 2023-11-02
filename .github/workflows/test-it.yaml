@@ -1,0 +1,19 @@
+name: test it, yo
+
+on:
+  repository_dispatch:
+    types: [approve-test-run-command]
+
+jobs:
+  run-ze-test:
+    runs-on: ubuntu-latest
+    permissions:
+      check: write
+    if: github.event_name == 'repository_dispatch' &&
+      github.event.client_payload.slash_command.args.named.sha != '' &&
+      contains(github.event.client_payload.pull_request.head.sha, github.event.client_payload.slash_command.args.named.sha)
+    steps:
+      - name: echo hi
+        run: |
+          echo hi
+
